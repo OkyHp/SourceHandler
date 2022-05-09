@@ -256,7 +256,7 @@ case $h_function in
 	cd ~/$general_dir/$steam_cmd && ./steamcmd.sh +quit;
 	screen -X -S $h_server'_serv' quit;
 	message "\n>> Сервер ${GREEN}$h_server ${NC}выключен!";
-	printToLog $h_server "[Stop]: Server $h_server stoped.";
+	printToLog $h_server "[Stop]: Server $h_server stopped.";
 ;;
 
 -restart)
@@ -412,7 +412,7 @@ case $h_function in
 		message ">> ${GREEN}В корне пользователя создана директория '$general_dir/$backup_dir'${NC}";
 		mkdir ~/$general_dir/$backup_dir;
 	else
-		message ">> Удаление бэкапаков старше ${GREEN}30 ${NC}дней, ожидайте..";
+		message ">> Удаление бэкапов старше ${GREEN}30 ${NC}дней, ожидайте..";
 		find ~/$general_dir/$backup_dir -type f -name 'backup_*.zip' -mmin +$handler_backups_time -exec rm -f {} \;
 	fi
 
@@ -431,7 +431,7 @@ case $h_function in
 
 	#mv ~/$archive ~/!backups/;
 	message ">> Бэкап для сервера ${GREEN}$h_server ${NC}создан!";
-	printToLog $h_server "[Blackup]: Blackup created for $h_server server.";
+	printToLog $h_server "[Backup]: Backup created for $h_server server.";
 ;;
 
 -install)
@@ -570,7 +570,7 @@ case $h_function in
 	checkTwoArg $h_server;
 	validServer $h_server;
 
-	message ">> Сгенерированная настрока CRON для сервера ${GREEN}$h_server${NC}:\n\n";
+	message ">> Сгенерированная настройка CRON для сервера ${GREEN}$h_server${NC}:\n\n";
 
 	path="`pwd`${0:1:${#0}}";
 	message "${GREEN}# Check update for server \n30 * * * * $path -cu $h_server -update\n${NC}";
@@ -590,7 +590,7 @@ case $h_function in
 	message "Использование: ${GREEN}$0 <command> <server/agr #2> <agr #3> ...\n";
 	message "${NC}Команды(Ключи): ";
 	message "\n-----------------------------------------------------------------\n";
-	message " ${GREEN}-init \t\t\t\t${NC}| Инициализация среды для срипта. Cоздание всех конфигов и ярлыка для работы с скриптом (обработчиком).";
+	message " ${GREEN}-init \t\t\t\t${NC}| Инициализация среды для скрипта. Cоздание всех конфигов и ярлыка для работы с скриптом (обработчиком).";
 	message " ${GREEN}-install-package ${NC}или ${GREEN}-i-p \t${NC}| Установить стандартные пакеты для работы сервера.";
 	message " ${GREEN}-install \t\t\t${NC}| Установить новый сервер. Имеет #3 аргумент: \n\t\t\t\t|\t${GREEN}-csgo ${NC}-- Установит CS:GO сервер. \n\t\t\t\t|\t${GREEN}-css ${NC}-- Установит CS:Source сервер.";
 	message "\n-----------------------------------------------------------------\n";
