@@ -269,6 +269,16 @@ case $h_function in
 	cd ~/ && $0 -sc $h_server "$command_for_restart" && $0 -stop $h_server && $0 -start $h_server;
 ;;
 
+-rc)
+	if ! [ -e /var/run/screen/S-$(whoami)/*.$h_server'_serv' ]; then
+		message ">> ${RED}Ошибка! ${NC}Сервер ${GREEN}$h_server ${NC}выключен!";
+		die;
+	fi
+
+	loadSettingsConfig;
+	cd ~/ && $0 -sc $h_server "$command_for_restart" && $0 -stop $h_server && $0 -start $h_server -con;
+;;
+
 -update)
 	checkTwoArg $h_server;
 	validServer $h_server;
@@ -598,6 +608,7 @@ case $h_function in
 	message " ${GREEN}-start \t\t\t${NC}| Включение сервера. Имеет #3 аргумент: \n\t\t\t\t|\t${GREEN}-con ${NC}-- Откроет консоль сервера при запуске.";
 	message " ${GREEN}-stop	 \t\t\t${NC}| Выключение сервера";
 	message " ${GREEN}-restart \t\t\t${NC}| Перезапуск сервера";
+	message " ${GREEN}-rc \t\t\t${NC}| Перезапуск сервера с открытием консоли";
 	message " ${GREEN}-update \t\t\t${NC}| Обновление сервера. Имеет #3 аргумент: \n\t\t\t\t|\t${GREEN}-val ${NC}-- Запустит validate update. \n\t\t\t\t|\t${GREEN}-auto ${NC}-- Выключает, обновляет и запускает сервер (Для Cron).";
 	message " ${GREEN}-console \t  ${NC}или ${GREEN}-con \t${NC}| Открыть консоль сервера.";
 	message " ${GREEN}-check-update \t  ${NC}или ${GREEN}-cu \t${NC}| Проверить наличие обновления для сервера. Имеет #3 аргумент: \n\t\t\t\t|\t${GREEN}-update ${NC}-- Если обновление найдено - обновить сервер.";
